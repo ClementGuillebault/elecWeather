@@ -1,8 +1,8 @@
 const {ipcRenderer, shell} = require('electron')
 const Weather = require('../weather');
 
-function getWeather(town='Caen') {
-    const key = '88bb49385d50153ff1e400ccedf38cda';
+function getWeather(town='') {
+    const key = '';
     const url = 'http://api.openweathermap.org/data/2.5/weather?q=' + town + '&APPID=' + key;
 
     return window.fetch(url).then((response) => {
