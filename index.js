@@ -16,6 +16,10 @@ app.on('window-all-closed', () => {
   app.quit();
 })
 
+/**
+ * @function createTray
+ * Tray creation
+ */
 function createTray() {
     tray = new Tray(path.join(img, 'icon.ico'))
 
@@ -27,6 +31,10 @@ function createTray() {
     })
 }
 
+/**
+ * @function getWindowPosition
+ * Get window position from tray position
+ */
 function getWindowPosition() {
     let windowBounds = window.getBounds();
     let trayBounds   = tray.getBounds();
@@ -38,6 +46,10 @@ function getWindowPosition() {
     return {x: x, y: y}
 }
 
+/**
+ * @function createWindow
+ * Create window
+ */
 function createWindow() {
     window = new BrowserWindow({
         width: 280,
@@ -58,6 +70,10 @@ function createWindow() {
     })
 }
 
+/**
+ * @function toggleWindow
+ * Hide or not window
+ */
 function toggleWindow() {
     if (window.isVisible()) {
         window.hide();
@@ -67,6 +83,10 @@ function toggleWindow() {
     }
 }
 
+/**
+ * @function showWindow
+ * Show window
+ */
 function showWindow() {
     let position = getWindowPosition();
     window.setPosition(position.x, position.y, false);

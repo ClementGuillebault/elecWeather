@@ -1,8 +1,13 @@
 const {ipcRenderer, shell} = require('electron')
 const Weather = require('../weather');
 
-function getWeather(town='') {
-    const key = '';
+/**
+ * @function getWeather
+ * @param {string} town
+ * Get data from API weather URL 
+ */
+function getWeather(town='Caen') {
+    const key = '88bb49385d50153ff1e400ccedf38cda';
     const url = 'http://api.openweathermap.org/data/2.5/weather?q=' + town + '&APPID=' + key;
 
     return window.fetch(url).then((response) => {
@@ -10,6 +15,11 @@ function getWeather(town='') {
     });
 }
 
+/**
+ * @function updateView
+ * @param {object} weather
+ * Update view with data 
+ */
 function updateView(weather) {
     document.getElementById('temp').innerHTML          = weather._weatherNormalized.temperature + '°';
     document.getElementById('condition').innerHTML     = weather._weatherNormalized.condition;
@@ -21,7 +31,11 @@ function updateView(weather) {
     document.getElementById('cloudcoverage').innerHTML = weather._weatherNormalized.couverturenuageuse;
 }
 
-
+/**
+ * @function sendNotification
+ * @param {object} weather 
+ * Send notification on desktop
+ */
 function sendNotification(weather) {
     let notification = new Notification('Conditions climatiques', {
         body: 'Température extérieur ' + weather._weatherNormalized.temperature + '°',
@@ -33,6 +47,10 @@ function sendNotification(weather) {
     });
 }
 
+/**
+ * @function updateWeather
+ * MaJ weather
+ */
 function updateWeather() {
     getWeather().then((res) => {
         let weather = new Weather(res);
@@ -42,7 +60,9 @@ function updateWeather() {
     })
 }
 
+//30 minutes
 let time = 30 * 60 * 1000
 setInterval(updateWeather, time)
 
+//Bind function when dom is loaded
 document.addEventListener('DOMContentLoaded', updateWeather)

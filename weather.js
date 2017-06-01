@@ -1,18 +1,40 @@
+/**
+ * @class {Object} Weather
+ * @author Clement
+ * Normalize data from weather api
+ */
 class Weather {
+
+    /**
+     * @constructor {object} weather
+     * @param {ojbect} Data
+     */
     constructor(weather) {
         this._weather = weather;
         this._weatherNormalized = {};
         this.normalize();
     }
 
+    /**
+     * @function weather
+     * GETTERS
+     */
     get weather() {
         return this._weather;
     }
 
+    /**
+     * @function weatherNormalized
+     * GETTERS
+     */
     get weatherNormalized() {
         return this._weatherNormalized;
     }
 
+    /**
+     * @function normalize
+     * Regroup all functions
+     */
     normalize() {
         this.temperature();
         this.condition();
@@ -23,19 +45,52 @@ class Weather {
         this.visibility();
     }
 
+    /**
+     * @function temperature
+     * Format temperature string
+     */
     temperature() {
         this._weatherNormalized.temperature = Math.round(this._weather.main.temp - 273.15);
     }
 
+    /**
+     * @function visibility
+     * format visibility string
+     */
     visibility() {
         this._weatherNormalized.visibilite = this._weather.visibility;
     }
 
+    /**
+     * @function wind
+     * format wind string
+     */
     wind() {
         this._weatherNormalized.vent = Math.round(this._weather.wind.speed * 3.6);
         this._weatherNormalized.dirVent = this.getWindDirection(this._weather.wind.deg);
     }
 
+    /**
+     * @function humidity
+     * format humidity string
+     */
+    humidity() {
+        this._weatherNormalized.humidite = this._weather.main.humidity;
+    }
+
+    /**
+     * @function precipitation
+     * format precipitation string
+     */
+    precipitation() {
+        this._weatherNormalized.precipitation = this._weather.precipitation ? this._weather.precipitation : '0';
+    }
+
+    /**
+     * @function getWindDirection
+     * @param {string} direction Wind dir in degrees
+     * format direction wind string
+     */
     getWindDirection(direction) {
         if (direction < 45) return 'NNE';
         if (direction === 45) return 'NE';
@@ -62,14 +117,10 @@ class Weather {
         return 'N';
     }
 
-    humidity() {
-        this._weatherNormalized.humidite = this._weather.main.humidity;
-    }
-
-    precipitation() {
-        this._weatherNormalized.precipitation = this._weather.precipitation ? this._weather.precipitation : '0';
-    }
-
+    /**
+     * @function cloudCoverage
+     * format cloudCoverage string
+     */
     cloudCoverage() {
         if (this._weather.clouds.all < 30) {
             this._weatherNormalized.couverturenuageuse = 'Dégagé';
@@ -82,6 +133,10 @@ class Weather {
         }
     }
 
+    /**
+     * @function condition
+     * format condition string & img string
+     */
     condition() {
         switch(this._weather.weather[0].main) {
             case 'Thunderstorm':
