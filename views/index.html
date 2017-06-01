@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="app">
+<head>
+    <title>elecWeather</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Kube CSS -->
+    <link rel="stylesheet" href="../assets/kube.css">
+
+</head>
+<body>
+    <div>
+        <div class="row gutters auto">
+            <div class="col">
+                <dl>
+                    <dt>Condition</dt>
+                    <dd id="condition"></dd>
+                </dl>
+            </div>
+            <div class="col">
+                <dl>
+                    <dt>Température</dt>
+                    <dd id="temp"></dd>
+                </dl>
+            </div>
+        </div>
+        <div class="row gutters auto">
+            <div class="col">
+                <dl>
+                    <dt>Vent</dt>
+                    <dd id="wind"></dd>
+                </dl>
+            </div>
+            <div class="col">
+                <dl>
+                    <dt>Direction</dt>
+                    <dd id="winddir"></dd>
+                </dl>
+            </div>
+        </div>
+        <div class="row gutters auto">
+            <div class="col">
+                <dl>
+                    <dt>Humidité</dt>
+                    <dd id="humidity"></dd>
+                </dl>
+            </div>
+            <div class="col">
+                <dl>
+                    <dt>Precipitation</dt>
+                    <dd id="precipitation"></dd>
+                </dl>
+            </div>
+        </div>
+        <div class="row gutters auto">
+            <div class="col">
+                <dl>
+                    <dt>Visibilité</dt>
+                    <dd id="visibility"></dd>
+                </dl>
+            </div>
+            <div class="col">
+                <dl>
+                    <dt>Couverture nuageuse</dt>
+                    <dd id="cloudcoverage"></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <!-- Renderer-process -->
+    <script src="../renderer-process/index.js"></script>
+</body>
+</html>
